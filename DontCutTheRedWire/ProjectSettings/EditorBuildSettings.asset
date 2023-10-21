@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/DontCutTheRedWire.unity
+    path: Assets/Scenes/DontCutTheRedWire.unity
     guid: 469ee70b0f5069e4caa1f680c62d3ab2
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: b094e8ac9eba6354d9aceb4ff244af84,
