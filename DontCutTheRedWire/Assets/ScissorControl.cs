@@ -23,17 +23,18 @@ namespace HandTools
             Vector3 closedPosition = _scissors[0].transform.forward - _scissors[1].transform.forward;
             float scissorAngle = Vector3.Angle(closedPosition, _scissors[1].transform.forward);
 
-            Debug.Log("angle" + scissorAngle);
+          //  Debug.Log("angle" + scissorAngle);
             if ((scissorAngle < 95f) && canCut == false)
             {
                 
                 ActivateCutColliders(true);
-                Debug.Log("Cut object");
+               Debug.Log("closed");
                 canCut = true;
             }
-            if ((scissorAngle < 100f) && canCut == true)
+            if ((scissorAngle > 100f) && canCut == true)
             {
-               // ActivateCutColliders(false);
+                 Debug.Log("open");
+                 ActivateCutColliders(false);
                 canCut = false;
             }
         }
@@ -41,7 +42,7 @@ namespace HandTools
 
         private void ActivateCutColliders(bool state)
         {
-            Debug.Log("activateColiders");
+          //  Debug.Log("activateColiders");
             foreach (Collider c in _scissorColliders)
             {
                 c.enabled = state;
