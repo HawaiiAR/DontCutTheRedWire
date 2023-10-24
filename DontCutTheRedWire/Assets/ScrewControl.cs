@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BombParts
+namespace HandTools
 {
-    public class ScrewControl : MonoBehaviour
+    public class ScrewControl : DrillbitControl
     {
-        [SerializeField] private float _spinTime;
-        [SerializeField] private float _rotSpeed;
-        [SerializeField] private float _moveSpeed;
-        private Rigidbody _rb;
+    
+    
 
-        bool canSpin;
         // Start is called before the first frame update
-        void Start()
+        protected override void Start()
         {
-            _rb = this.GetComponent<Rigidbody>();
+            base.Start();
+            spinTime = 3;
         }
 
         // Update is called once per frame
@@ -23,22 +21,28 @@ namespace BombParts
         {
             if (canSpin)
             {
-                if (_spinTime > 0)
+                if (spinTime > 0)
                 {
-                    _spinTime -= Time.deltaTime;
-                    transform.Rotate(0, 0, _rotSpeed * Time.deltaTime);
-                    transform.Translate(0, 0, _moveSpeed * Time.deltaTime);
+                    spinTime -= Time.deltaTime;
+                    Spin();      
                 }
-                if(_spinTime <= 0)
+                if(spinTime <= 0)
                 {
-                    _rb.isKinematic = false;
-                    _rb.useGravity = true;
-                    canSpin = false;
+                    ReleaseScrew();
                 }
             }
         }
 
-        private void OnCollisionEnter(Collision collision)
+
+
+        protected override void ReleaseScrew()
+        {
+            _rb.isKinematic = false;
+            _rb.useGravity = true;
+            canSpin = false;
+        }
+
+      /*  private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Drill"))
             {
@@ -52,7 +56,7 @@ namespace BombParts
             {
                 canSpin = false;
             }
-        }
+        }*/
 
 
     }
