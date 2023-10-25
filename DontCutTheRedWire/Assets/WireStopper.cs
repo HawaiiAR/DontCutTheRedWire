@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class WireStopper : MonoBehaviour
 {
+
+    [SerializeField] Collider[] _wireColliders;
+
+
+    private void Awake()
+    {
+        ColliderActiveState(false);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("WireStopper"))
@@ -14,5 +22,14 @@ public class WireStopper : MonoBehaviour
     private void SetParentToNull()
     {
         this.transform.parent = null;
+        ColliderActiveState(true);
+    }
+
+    private void ColliderActiveState(bool state)
+    {
+        foreach (Collider c in _wireColliders)
+        {
+            c.enabled = state;
+        }
     }
 }

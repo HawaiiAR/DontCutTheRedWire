@@ -10,6 +10,7 @@ TagManager:
   - Wrench
   - BoltBase
   - WireStopper
+  - Hammer
   layers:
   - Default
   - TransparentFX
