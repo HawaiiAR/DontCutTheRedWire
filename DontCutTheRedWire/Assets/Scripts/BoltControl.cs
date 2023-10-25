@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace HandTools
@@ -13,8 +14,8 @@ namespace HandTools
 
         private GameObject _wrenchContact;
         private Vector3 _currentRotation;
-       
-        [SerializeField] Rigidbody _rb;
+        private Vector3 _startPos;
+     Rigidbody _rb;
         bool canTurn;
         
 
@@ -22,6 +23,8 @@ namespace HandTools
         // Start is called before the first frame update
         void Start()
         {
+            _startPos = this.transform.position;
+            _rb = this.GetComponent<Rigidbody>();
             
        }
 
@@ -45,6 +48,13 @@ namespace HandTools
                     {
                        
                        this.transform.Translate(0, 0, _moveSpeed * Time.deltaTime);
+                        float _distance = Vector3.Distance(this.transform.position, _startPos);
+                        if (_distance > .05f)
+                        {
+                            Debug.Log("bolt out");
+                            _rb.isKinematic = false;
+                            _rb.useGravity = true;
+                        }
                     }
                  
                 }
@@ -55,9 +65,9 @@ namespace HandTools
         {
             if (other.CompareTag("Wrench"))
             {
+                Debug.Log("wrench");
                 _currentRotation = _bolt.transform.up;
                 _wrenchContact = other.gameObject;
-                _rb = other.GetComponent<Rigidbody>();
                 canTurn = true;
                
 
@@ -70,10 +80,10 @@ namespace HandTools
         {
             if (other.CompareTag("Wrench"))
             {
-          
+
                 _wrenchContact = other.gameObject;
                 canTurn = false;
-              
+
             }
         }
 
