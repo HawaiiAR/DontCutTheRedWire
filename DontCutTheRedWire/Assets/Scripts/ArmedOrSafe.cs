@@ -7,7 +7,7 @@ namespace BombParts
 {
     public class ArmedOrSafe : MonoBehaviour
     {
-
+        [SerializeField] BombComponent bombComponent;
         public bool isArmed = false;
 
         private MeshRenderer _rend;
@@ -48,7 +48,7 @@ namespace BombParts
                 }
                 if (!isArmed)
                 {
-
+                    bombComponent.RemoveAttatcher(this.gameObject);
                     WireCut("alive");
                 }
             }
@@ -64,7 +64,9 @@ namespace BombParts
             {
                 int randColor = Random.Range(0, _wireColors.Count);
                 _rend.material.color = _wireColors[randColor];
+                bombComponent.AddAttatcher(this.gameObject);
             }
+           
         }
 
 

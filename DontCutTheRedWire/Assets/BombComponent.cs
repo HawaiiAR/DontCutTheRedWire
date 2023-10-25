@@ -1,28 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using Oculus.Interaction;
 
 namespace BombParts
 {
     public class BombComponent : MonoBehaviour
     {
-
-        [SerializeField] private GameObject[] _wires;
-        [SerializeField] private GameObject[] _attatchers;
-
-        [SerializeField] private List<GameObject> _activeWires;
+        Grabbable grabable;
         ArmedOrSafe armedOrSafe;
 
-        // Start is called before the first frame update
+        [SerializeField] private GameObject[] _wires;
+        [SerializeField] private List<GameObject> _attatchers = new List<GameObject>();
+        [SerializeField] private List<GameObject> _activeWires;
+
+        bool gameStarted;
+        bool isAttatched;
+
         void Start()
         {
             SetWires();
+            grabable.enabled = false;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-
+            if (gameStarted)
+            {
+                if(_attatchers.Count <= 0 && isAttatched)
+                {
+                    grabable.enabled = true;
+                    isAttatched = false;
+                }
+            }
         }
 
         private void SetWires()
@@ -33,12 +44,11 @@ namespace BombParts
             }
             int visibleWires = Random.Range(3, _wires.Length);
 
-            Debug.Log("active wires" + visibleWires);
+          //  Debug.Log("active wires" + visibleWires);
 
             for (int i = 0; i < visibleWires; i++)
             {
                 int aWire = Random.Range(1, visibleWires);
-              //  GameObject wire = _wires[aWire];
 
                 if (_wires[aWire] != null)
                 {
@@ -65,6 +75,19 @@ namespace BombParts
                 }
             }
 
+        }
+
+        public void AddAttatcher(GameObject attatcher)
+        {
+            _attatchers.Add(attatcher);
+        }
+
+        public void RemoveAttatcher(GameObject attatcher)
+        {
+            if (attatcher != null)
+            {
+                _attatchers.Remove(attatcher);
+            }
         }
     }
 }

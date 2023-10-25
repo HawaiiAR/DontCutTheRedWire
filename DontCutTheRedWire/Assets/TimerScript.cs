@@ -8,7 +8,8 @@ using UnityEngine;
 namespace GameControl {
     public class TimerScript : MonoBehaviour
     {
-    
+
+        public static Action Kaboom;
         
         [SerializeField] private float _minutes;
         [SerializeField] private float _seconds;
@@ -18,7 +19,7 @@ namespace GameControl {
 
         bool gameStarted = false;
 
-        // Start is called before the first frame update
+
         void Start()
         {
             // subscribe to game start to set timer for now start on enable
@@ -30,13 +31,19 @@ namespace GameControl {
             StartGame();
         }
 
-        // Update is called once per frame
+
         void Update()
         {
             if (gameStarted)
             {
                 GameTimer();
+                if (_seconds <= 0 )
+                {
+                    Kaboom?.Invoke();
+                    gameStarted = false;
+                }
             }
+
         }
 
         private void StartGame()

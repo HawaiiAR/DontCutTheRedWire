@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using BombParts;
 using UnityEngine;
 
 namespace HandTools
 {
     public class ScrewControl : DrillbitControl
     {
-    
-    
+        [SerializeField] BombComponent bombComponent;
+
 
         // Start is called before the first frame update
         protected override void Start()
         {
             base.Start();
             spinTime = 3;
+            bombComponent.AddAttatcher(this.gameObject);
         }
 
         // Update is called once per frame
@@ -37,6 +39,7 @@ namespace HandTools
 
         protected override void ReleaseScrew()
         {
+            bombComponent.RemoveAttatcher(this.gameObject);
             _rb.isKinematic = false;
             _rb.useGravity = true;
             canSpin = false;

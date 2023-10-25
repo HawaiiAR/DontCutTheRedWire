@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using BombParts;
 
 namespace HandTools
 {
     public class BoltControl : MonoBehaviour
     {
-      
+        [SerializeField] BombComponent bombComponent;
         [SerializeField] private GameObject _bolt;
         [SerializeField] private float _moveSpeed;
         
@@ -15,20 +16,21 @@ namespace HandTools
         private GameObject _wrenchContact;
         private Vector3 _currentRotation;
         private Vector3 _startPos;
-     Rigidbody _rb;
+
+        Rigidbody _rb;
+
         bool canTurn;
         
 
-
-        // Start is called before the first frame update
         void Start()
         {
             _startPos = this.transform.position;
             _rb = this.GetComponent<Rigidbody>();
+            bombComponent.AddAttatcher(this.gameObject);
             
        }
 
-        // Update is called once per frame
+
         void Update()
         {
             
@@ -51,9 +53,7 @@ namespace HandTools
                         float _distance = Vector3.Distance(this.transform.position, _startPos);
                         if (_distance > .05f)
                         {
-                            Debug.Log("bolt out");
-                            _rb.isKinematic = false;
-                            _rb.useGravity = true;
+                            ReleaseBolt();
                         }
                     }
                  
@@ -61,6 +61,17 @@ namespace HandTools
                 
             }
         }
+
+
+        private void ReleaseBolt()
+        {
+            Debug.Log("bolt out");
+            bombComponent.RemoveAttatcher(this.gameObject);
+            _rb.isKinematic = false;
+            _rb.useGravity = true;
+        }
+
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Wrench"))
@@ -69,8 +80,6 @@ namespace HandTools
                 _currentRotation = _bolt.transform.up;
                 _wrenchContact = other.gameObject;
                 canTurn = true;
-               
-
 
             }
         }
