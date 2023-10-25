@@ -8,12 +8,18 @@ namespace BombParts
     public class ArmedOrSafe : MonoBehaviour
     {
 
-        public bool isArmed;
-        // Start is called before the first frame update
+        public bool isArmed = false;
+
+        private MeshRenderer _rend;
+        private List<Color> _wireColors = new List<Color> { Color.black, Color.blue, Color.green, Color.cyan, Color.magenta };
+      
+
+
         private void Start()
         {
-            isArmed = true;
-            ;
+           
+            _rend = this.GetComponent<MeshRenderer>();
+            
         }
 
         private void WireCut(string aliveOrDead)
@@ -45,6 +51,19 @@ namespace BombParts
 
                     WireCut("alive");
                 }
+            }
+        }
+
+        public void SetColor()
+        {
+            if (isArmed)
+            {
+                _rend.material.color = Color.red;
+            }
+            else
+            {
+                int randColor = Random.Range(0, _wireColors.Count);
+                _rend.material.color = _wireColors[randColor];
             }
         }
 
