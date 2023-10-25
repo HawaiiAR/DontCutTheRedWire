@@ -9,6 +9,7 @@ TagManager:
   - Drill
   - Wrench
   - BoltBase
+  - WireStopper
   layers:
   - Default
   - TransparentFX

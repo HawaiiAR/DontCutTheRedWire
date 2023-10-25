@@ -8,23 +8,23 @@ namespace BombParts
 {
     public class BombComponent : MonoBehaviour
     {
-        Grabbable grabable;
-        ArmedOrSafe armedOrSafe;
+        protected Grabbable grabable;
+        protected  ArmedOrSafe armedOrSafe;
 
-        [SerializeField] private GameObject[] _wires;
-        [SerializeField] private List<GameObject> _attatchers = new List<GameObject>();
-        [SerializeField] private List<GameObject> _activeWires;
+        [SerializeField] protected GameObject[] _wires;
+        [SerializeField] protected List<GameObject> _attatchers = new List<GameObject>();
+        [SerializeField] protected List<GameObject> _activeWires;
 
-        bool gameStarted;
-        bool isAttatched;
+        protected bool gameStarted;
+        protected bool isAttatched;
 
-        void Start()
+        protected virtual void Start()
         {
             SetWires();
-            grabable.enabled = false;
+       //     grabable.enabled = false;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (gameStarted)
             {
@@ -36,12 +36,13 @@ namespace BombParts
             }
         }
 
-        private void SetWires()
+        protected virtual void SetWires()
         {
             foreach (GameObject w in _wires)
             {
                 w.SetActive(false);
             }
+
             int visibleWires = Random.Range(3, _wires.Length);
 
           //  Debug.Log("active wires" + visibleWires);
@@ -61,7 +62,7 @@ namespace BombParts
             ActivateWires();
         }
 
-        private void ActivateWires()
+        protected virtual void ActivateWires()
         {
             int randomWire = Random.Range(0, _activeWires.Count);
             _activeWires[randomWire].GetComponent<ArmedOrSafe>().isArmed = true;
@@ -77,12 +78,12 @@ namespace BombParts
 
         }
 
-        public void AddAttatcher(GameObject attatcher)
+        public virtual void AddAttatcher(GameObject attatcher)
         {
             _attatchers.Add(attatcher);
         }
 
-        public void RemoveAttatcher(GameObject attatcher)
+        public virtual void RemoveAttatcher(GameObject attatcher)
         {
             if (attatcher != null)
             {
