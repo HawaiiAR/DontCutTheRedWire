@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using BombParts;
+using System;
 
 namespace GameControl
 {
     public class GameController : MonoBehaviour
     {
+        public static Action GameStarted;
+
         [SerializeField] private List<GameObject> _parts = new List<GameObject>();
 
 
@@ -36,6 +39,11 @@ namespace GameControl
                     Debug.Log("PlayerWins");
                 }
             }
+        }
+
+        public void StartGame()
+        {
+            GameStarted?.Invoke();
         }
 
         private void GameOver()
