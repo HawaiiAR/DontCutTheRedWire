@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using Oculus.Interaction;
+using GameControl;
 
 namespace BombParts
 {
@@ -10,9 +11,10 @@ namespace BombParts
     {
         protected Grabbable grabable;
         protected  ArmedOrSafe armedOrSafe;
+        protected GameController gameControl;
 
         [SerializeField] protected GameObject[] _wires;
-        [SerializeField] protected List<GameObject> _attatchers = new List<GameObject>();
+        [SerializeField] public List<GameObject> _attatchers = new List<GameObject>();
         [SerializeField] protected List<GameObject> _activeWires;
 
         protected bool gameStarted;
@@ -21,8 +23,12 @@ namespace BombParts
         protected virtual void Start()
         {
             SetWires();
+            gameControl = FindObjectOfType<GameController>();
+            gameControl.AddPartToList(this.gameObject);
        //     grabable.enabled = false;
         }
+
+        
 
         protected virtual void Update()
         {
@@ -31,6 +37,7 @@ namespace BombParts
                 if(_attatchers.Count <= 0 && isAttatched)
                 {
                     grabable.enabled = true;
+                    gameControl.RemovePartFromList(this.gameObject);
                     isAttatched = false;
                 }
             }

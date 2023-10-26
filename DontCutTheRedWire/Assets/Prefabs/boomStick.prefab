@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4978145172777277797}
   - component: {fileID: 3924971381408851403}
   - component: {fileID: 7271123177951685064}
-  - component: {fileID: 881990739301734189}
+  - component: {fileID: 2430364168391164232}
   m_Layer: 0
   m_Name: boomStick
   m_TagString: Untagged
@@ -129,8 +129,8 @@ MonoBehaviour:
   _wires: []
   _attatchers: []
   _activeWires: []
---- !u!65 &881990739301734189
-BoxCollider:
+--- !u!136 &2430364168391164232
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -144,12 +144,14 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.040434588, y: 0.006041672, z: 0.007980137}
-  m_Center: {x: 0.00071669644, y: 3.492459e-10, z: -2.3283062e-10}
+  serializedVersion: 2
+  m_Radius: 0.002730866
+  m_Height: 0.040837247
+  m_Direction: 0
+  m_Center: {x: 0.0005086293, y: 0.00018537354, z: 0.00007480951}
 --- !u!1 &8035058612143898554
 GameObject:
   m_ObjectHideFlags: 0

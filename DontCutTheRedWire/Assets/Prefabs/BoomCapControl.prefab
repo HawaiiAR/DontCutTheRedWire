@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 7051705463648917795}
   - component: {fileID: 5051879839921593232}
   - component: {fileID: 5666971605451675856}
-  - component: {fileID: 7935751245981188793}
   - component: {fileID: 2113663069940370623}
+  - component: {fileID: 6028325360217264070}
   m_Layer: 0
   m_Name: BoomCapControl
   m_TagString: Untagged
@@ -139,21 +139,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0024502513, y: 0.0024502932, z: 0.0040664608}
   m_Center: {x: -9.454319e-19, y: 0, z: 0.0009012614}
---- !u!114 &7935751245981188793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4850095023856254157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e809980c9ed4d909dda67aa3abbaa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bombComponent: {fileID: 0}
-  _bolt: {fileID: 3161496809377158403}
-  _moveSpeed: 0.05
 --- !u!59 &2113663069940370623
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -193,6 +178,21 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6028325360217264070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4850095023856254157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec87525068904e19b659cf21100b321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombComponent: {fileID: 0}
+  _bolt: {fileID: 0}
+  _moveSpeed: 0
 --- !u!1 &7369863132521700990
 GameObject:
   m_ObjectHideFlags: 0

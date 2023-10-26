@@ -9,20 +9,20 @@ namespace HandTools
     public class BoltControl : MonoBehaviour
     {
         [SerializeField] BombComponent bombComponent;
-        [SerializeField] private GameObject _bolt;
-        [SerializeField] private float _moveSpeed;
+        [SerializeField] protected GameObject _bolt;
+        [SerializeField] protected float _moveSpeed;
+
+
+        protected GameObject _wrenchContact;
+        protected Vector3 _currentRotation;
+        protected Vector3 _startPos;
+
+        protected Rigidbody _rb;
+
+        protected bool canTurn;
         
 
-        private GameObject _wrenchContact;
-        private Vector3 _currentRotation;
-        private Vector3 _startPos;
-
-        Rigidbody _rb;
-
-        bool canTurn;
-        
-
-        void Start()
+        protected virtual void Start()
         {
             _startPos = this.transform.position;
             _rb = this.GetComponent<Rigidbody>();
@@ -31,7 +31,7 @@ namespace HandTools
        }
 
 
-        void Update()
+        protected virtual void Update()
         {
             
             if (canTurn)
@@ -63,7 +63,7 @@ namespace HandTools
         }
 
 
-        private void ReleaseBolt()
+        protected virtual void ReleaseBolt()
         {
             Debug.Log("bolt out");
             bombComponent.RemoveAttatcher(this.gameObject);
@@ -72,7 +72,7 @@ namespace HandTools
         }
 
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Wrench"))
             {
@@ -85,7 +85,7 @@ namespace HandTools
         }
 
 
-        private void OnTriggerExit(Collider other)
+        protected virtual void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Wrench"))
             {

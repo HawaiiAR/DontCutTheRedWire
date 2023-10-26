@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 namespace BombParts
 {
     public class ArmedOrSafe : MonoBehaviour
     {
+        public static Action BombsGoneOff;
+
         [SerializeField] BombComponent bombComponent;
         public bool isArmed = false;
 
@@ -30,7 +33,7 @@ namespace BombParts
                     Debug.Log("alive");
                     break;
                 case "dead":
-                    Debug.Log("dead");
+                    BombsGoneOff?.Invoke();
                     break;
             }
             Destroy(this.gameObject);
@@ -62,7 +65,7 @@ namespace BombParts
             }
             else
             {
-                int randColor = Random.Range(0, _wireColors.Count);
+                int randColor = UnityEngine.Random.Range(0, _wireColors.Count);
                 _rend.material.color = _wireColors[randColor];
                 bombComponent.AddAttatcher(this.gameObject);
             }
