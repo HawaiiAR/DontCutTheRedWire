@@ -9,7 +9,8 @@ namespace BombParts
 {
     public class BombComponent : MonoBehaviour
     {
-       
+        public bool isConnector;
+
         protected  ArmedOrSafe armedOrSafe;
         protected GameController gameControl;
 
@@ -21,20 +22,26 @@ namespace BombParts
         protected bool gameStarted;
         protected bool isAttatched;
 
-        protected virtual void Start()
+        private void Awake()
         {
-            GameController.GameStarted += StartGame;
-            isAttatched = true;
-
-            SetWires();
-            gameControl = FindObjectOfType<GameController>();
-           
-
-            gameControl.AddPartToList(this.gameObject);
             if (grabable != null)
             {
                 grabable.enabled = false;
             }
+        }
+
+        protected virtual void Start()
+        {
+
+            GameController.GameStarted += StartGame;
+            isAttatched = true;
+            gameStarted = false;
+
+            SetWires();
+
+            gameControl = FindObjectOfType<GameController>();
+            gameControl.AddPartToList(this.gameObject);
+    
         }
 
         protected virtual void OnDisable()
@@ -45,13 +52,12 @@ namespace BombParts
         protected virtual void StartGame()
         {
             gameStarted = true;
+           
         }
         
-
         protected virtual void Update()
         {
-            if (gameStarted)
-            {
+            
                 if(_attatchers.Count <= 0 && isAttatched)
                 {
                     if (grabable != null)
@@ -60,8 +66,7 @@ namespace BombParts
                     }
                     gameControl.RemovePartFromList(this.gameObject);
                     isAttatched = false;
-                }
-            }
+                }       
         }
 
         protected virtual void SetWires()
@@ -71,23 +76,43 @@ namespace BombParts
                 w.SetActive(false);
             }
 
-            int visibleWires = Random.Range(3, _wires.Length);
-
-          //  Debug.Log("active wires" + visibleWires);
-
-            for (int i = 0; i < visibleWires; i++)
+            if (isConnector)
             {
+                foreach (GameObject w in _wires)
+                {
+                    w.SetActive(true);
+                    _activeWires.Add(w);
+                }
+            }
+            if (!isConnector)
+            {
+                int visibleWires = Random.Range(4, _wires.Length);
+                CalculateActiveWires(visibleWires);
+            }
+
+
+            ActivateWires();
+        }
+
+        protected virtual void CalculateActiveWires(int visibleWires)
+        {
+
+            for (int i = 0; i < visibleWires - 1; i++)
+            {
+
                 int aWire = Random.Range(1, visibleWires);
 
                 if (_wires[aWire] != null)
                 {
                     _wires[aWire].SetActive(true);
-                    _activeWires.Add(_wires[aWire]);
-                   
+
+                    if (_wires[aWire].gameObject == isActiveAndEnabled)
+                    {
+                        _activeWires.Add(_wires[aWire]);
+                    }
+
                 }
             }
-
-            ActivateWires();
         }
 
         protected virtual void ActivateWires()

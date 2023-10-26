@@ -68,11 +68,13 @@ namespace HandTools
 
         protected virtual void ReleaseBolt()
         {
+            grabable.enabled = true;
+            grabable.gameObject.transform.parent = null;
             Debug.Log("bolt out");
             bombComponent.RemoveAttatcher(this.gameObject);
             _rb.isKinematic = false;
            _rb.useGravity = true;
-            grabable.enabled = true;
+           
         }
 
 

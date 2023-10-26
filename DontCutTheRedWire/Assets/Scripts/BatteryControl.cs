@@ -11,14 +11,17 @@ namespace BombParts
         
         protected override void Start()
         {
-            GameController.GameStarted -= StartGame;
+            GameController.GameStarted += StartGame;
           
             isAttatched = true;
             if (grabable != null)
             {
                 grabable.enabled = false;
             }
-           
+
+            gameControl = FindObjectOfType<GameController>();
+            gameControl.AddPartToList(this.gameObject);
+
         }
      
 

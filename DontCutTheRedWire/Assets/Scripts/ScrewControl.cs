@@ -40,6 +40,7 @@ namespace HandTools
         protected override void ReleaseScrew()
         {
             bombComponent.RemoveAttatcher(this.gameObject);
+            this.transform.parent = null;
             _rb.isKinematic = false;
             _rb.useGravity = true;
             canSpin = false;
