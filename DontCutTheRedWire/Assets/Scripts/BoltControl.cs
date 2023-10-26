@@ -54,7 +54,7 @@ namespace HandTools
                        
                        this.transform.Translate(0, 0, _moveSpeed * Time.deltaTime);
                         float _distance = Vector3.Distance(this.transform.position, _startPos);
-                        if (_distance > .05f)
+                        if (_distance > .01f)
                         {
                             ReleaseBolt();
                         }
@@ -72,8 +72,8 @@ namespace HandTools
             grabable.gameObject.transform.parent = null;
             Debug.Log("bolt out");
             bombComponent.RemoveAttatcher(this.gameObject);
-            _rb.isKinematic = false;
-           _rb.useGravity = true;
+          //  _rb.isKinematic = false;
+         //  _rb.useGravity = true;
            
         }
 

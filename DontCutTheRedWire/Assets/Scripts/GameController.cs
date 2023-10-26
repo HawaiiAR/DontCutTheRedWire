@@ -9,10 +9,11 @@ namespace GameControl
 {
     public class GameController : MonoBehaviour
     {
+        public static Action<string> DifficultyLevel;
         public static Action GameStarted;
 
         [SerializeField] private List<GameObject> _parts = new List<GameObject>();
-
+        private string _difficultyLevel;
 
         bool gameStarted;
 
@@ -29,8 +30,28 @@ namespace GameControl
             ArmedOrSafe.BombsGoneOff -= GameOver;
         }
 
+        public void Difficulty(string _dificulty)
+        {
+            _difficultyLevel = _dificulty;
 
-        void Update()
+            switch (_dificulty)
+            {
+                case "easy":
+                    DifficultyLevel?.Invoke(_dificulty);
+
+                    break;
+                case "hard":
+                    DifficultyLevel?.Invoke(_dificulty);
+
+                    break;
+                case "impossible":
+                    DifficultyLevel?.Invoke(_dificulty);
+                    break;
+            }
+        }
+
+
+            void Update()
         {
             if (gameStarted)
             {

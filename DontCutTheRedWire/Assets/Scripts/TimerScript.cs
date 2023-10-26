@@ -16,11 +16,10 @@ namespace GameControl
         [SerializeField] BombComponent _timeBody;
         [SerializeField] private float _minutes;
         [SerializeField] private float _seconds;
-        [SerializeField] private float _gameTime;
-
         [SerializeField] private TMP_Text _timeDisplay;
-        
 
+        private float _gameTime;
+        private string _difficultyLevel;
         bool gameStarted = false;
 
 
@@ -29,6 +28,7 @@ namespace GameControl
             // subscribe to game start to set timer for now start on enable
             _timeDisplay.text = _gameTime.ToString();
             GameController.GameStarted += StartGame;
+            GameController.DifficultyLevel += Difficulty;
             stopTimer = false;
             DisplayTime(_gameTime);
 
@@ -37,6 +37,7 @@ namespace GameControl
         protected virtual void OnDisable()
         {
             GameController.GameStarted -= StartGame;
+            GameController.DifficultyLevel -= Difficulty;
         }
 
      
@@ -83,6 +84,28 @@ namespace GameControl
             _minutes = Mathf.FloorToInt(time / 60);
             _seconds = Mathf.FloorToInt(time % 60);
             _timeDisplay.text = string.Format("{0:00}:{1:00}", _minutes, _seconds);
+        }
+
+        public void Difficulty(string _dificulty)
+        {
+            _difficultyLevel = _dificulty;
+
+            switch (_dificulty)
+            {
+                case "easy":
+                    _gameTime = 90;
+
+                    break;
+                case "hard":
+                    _gameTime = 60;
+
+                    break;
+                case "impossible":
+                    _gameTime = 10;
+                    break;
+            }
+
+            DisplayTime(_gameTime);
         }
     }
 }
