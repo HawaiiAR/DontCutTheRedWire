@@ -29,7 +29,10 @@ namespace HandTools
             _startPos = this.transform.position;
             _rb = this.GetComponent<Rigidbody>();
             bombComponent.AddAttatcher(this.gameObject);
-            grabable.enabled = false;
+            if (grabable != null)
+            {
+                grabable.enabled = false;
+            }
 
         }
 
@@ -43,34 +46,38 @@ namespace HandTools
 
                 if (contactAngle < 10)
                 {
-                   
+
                     _bolt.transform.rotation = _wrenchContact.transform.rotation *
                          Quaternion.FromToRotation(_wrenchContact.transform.forward, this.transform.forward);
 
                     float boltRotAngle = Vector3.Angle(_currentRotation, _bolt.transform.up);
-                 
+
                     if (boltRotAngle > 10)
                     {
-                       
-                       this.transform.Translate(0, 0, _moveSpeed * Time.deltaTime);
+
+                        this.transform.Translate(0, 0, _moveSpeed * Time.deltaTime);
                         float _distance = Vector3.Distance(this.transform.position, _startPos);
-                        if (_distance > .01f)
+                        if (_distance > .05f)
                         {
                             ReleaseBolt();
+                            canTurn = false;
                         }
                     }
-                 
+
                 }
-                
+
             }
         }
 
 
         protected virtual void ReleaseBolt()
         {
+            Debug.Log("bolt out");
             grabable.enabled = true;
             grabable.gameObject.transform.parent = null;
-            Debug.Log("bolt out");
+            Rigidbody gB = grabable.gameObject.GetComponent<Rigidbody>();
+            gB.isKinematic = false;
+            gB.useGravity = true;
             bombComponent.RemoveAttatcher(this.gameObject);
           //  _rb.isKinematic = false;
          //  _rb.useGravity = true;

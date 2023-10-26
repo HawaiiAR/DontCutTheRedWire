@@ -14,7 +14,7 @@ namespace HandTools
         protected override void Start()
         {
             base.Start();
-            spinTime = 3;
+            spinTime = 1.1f;
             bombComponent.AddAttatcher(this.gameObject);
         }
 
