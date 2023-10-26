@@ -67,8 +67,8 @@ namespace HandTools
         {
             Debug.Log("bolt out");
             bombComponent.RemoveAttatcher(this.gameObject);
-           // _rb.isKinematic = false;
-           // _rb.useGravity = true;
+            _rb.isKinematic = false;
+           _rb.useGravity = true;
         }
 
 

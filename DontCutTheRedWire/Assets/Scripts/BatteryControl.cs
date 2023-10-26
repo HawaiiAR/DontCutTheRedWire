@@ -10,13 +10,31 @@ namespace BombParts
         
         protected override void Start()
         {
-          //  grabable.enabled = false;
+            isAttatched = true;
+            if (grabable != null)
+            {
+                grabable.enabled = false;
+            }
         }
 
         // Update is called once per frame
         protected override void Update()
         {
-            base.Update();
+            if (gameStarted)
+            {
+                if (_attatchers.Count <= 0 && isAttatched)
+                {
+                   
+                        grabable.enabled = true;
+                    
+                    gameControl.RemovePartFromList(this.gameObject);
+                    isAttatched = false;
+                }
+            }
+            if (Input.GetKeyDown("g"))
+            {
+                grabable.enabled = true;
+            }
         }
 
         public override void AddAttatcher(GameObject attatcher)

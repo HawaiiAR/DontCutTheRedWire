@@ -9,10 +9,11 @@ namespace BombParts
 {
     public class BombComponent : MonoBehaviour
     {
-        protected Grabbable grabable;
+       
         protected  ArmedOrSafe armedOrSafe;
         protected GameController gameControl;
 
+        [SerializeField] protected Grabbable grabable;
         [SerializeField] protected GameObject[] _wires;
         [SerializeField] public List<GameObject> _attatchers = new List<GameObject>();
         [SerializeField] protected List<GameObject> _activeWires;
@@ -22,10 +23,18 @@ namespace BombParts
 
         protected virtual void Start()
         {
+            gameStarted = true;
+            isAttatched = true;
+
             SetWires();
             gameControl = FindObjectOfType<GameController>();
+           
+
             gameControl.AddPartToList(this.gameObject);
-       //     grabable.enabled = false;
+            if (grabable != null)
+            {
+                grabable.enabled = false;
+            }
         }
 
         
@@ -36,7 +45,10 @@ namespace BombParts
             {
                 if(_attatchers.Count <= 0 && isAttatched)
                 {
-                    grabable.enabled = true;
+                    if (grabable != null)
+                    {
+                        grabable.enabled = true;
+                    }
                     gameControl.RemovePartFromList(this.gameObject);
                     isAttatched = false;
                 }
