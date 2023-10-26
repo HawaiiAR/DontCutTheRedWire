@@ -46,7 +46,7 @@ namespace BombParts
             {
                 if (isArmed)
                 {
-
+                    
                     WireCut("dead");
                 }
                 if (!isArmed)

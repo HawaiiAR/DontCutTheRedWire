@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BombParts;
 
 namespace GameControl
 {
@@ -16,11 +17,13 @@ namespace GameControl
         void Start()
         {
             TimerScript.Kaboom += GameOver;
+            ArmedOrSafe.BombsGoneOff += GameOver;
         }
 
         private void OnDisable()
         {
             TimerScript.Kaboom -= GameOver;
+            ArmedOrSafe.BombsGoneOff -= GameOver;
         }
 
 
