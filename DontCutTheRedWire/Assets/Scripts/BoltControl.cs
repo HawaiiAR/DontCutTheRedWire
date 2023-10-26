@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using BombParts;
+using Oculus.Interaction;
 
 namespace HandTools
 {
     public class BoltControl : MonoBehaviour
     {
+        [SerializeField] protected Grabbable grabable;
         [SerializeField] BombComponent bombComponent;
         [SerializeField] protected GameObject _bolt;
         [SerializeField] protected float _moveSpeed;
@@ -27,8 +29,9 @@ namespace HandTools
             _startPos = this.transform.position;
             _rb = this.GetComponent<Rigidbody>();
             bombComponent.AddAttatcher(this.gameObject);
-            
-       }
+            grabable.enabled = false;
+
+        }
 
 
         protected virtual void Update()
@@ -69,6 +72,7 @@ namespace HandTools
             bombComponent.RemoveAttatcher(this.gameObject);
             _rb.isKinematic = false;
            _rb.useGravity = true;
+            grabable.enabled = true;
         }
 
 

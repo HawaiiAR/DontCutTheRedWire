@@ -23,7 +23,7 @@ namespace BombParts
 
         protected virtual void Start()
         {
-            gameStarted = true;
+            GameController.GameStarted += StartGame;
             isAttatched = true;
 
             SetWires();
@@ -37,6 +37,15 @@ namespace BombParts
             }
         }
 
+        protected virtual void OnDisable()
+        {
+            GameController.GameStarted -= StartGame;
+        }
+
+        protected virtual void StartGame()
+        {
+            gameStarted = true;
+        }
         
 
         protected virtual void Update()

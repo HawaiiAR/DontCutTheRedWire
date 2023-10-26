@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Oculus.Interaction;
+using GameControl;
 
 namespace BombParts
 {
@@ -10,7 +11,8 @@ namespace BombParts
         
         protected override void Start()
         {
-            gameStarted = true;
+            GameController.GameStarted -= StartGame;
+          
             isAttatched = true;
             if (grabable != null)
             {
@@ -18,6 +20,8 @@ namespace BombParts
             }
            
         }
+     
+
 
         // Update is called once per frame
         protected override void Update()

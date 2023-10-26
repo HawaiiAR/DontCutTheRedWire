@@ -28,15 +28,18 @@ namespace GameControl
         {
             // subscribe to game start to set timer for now start on enable
             _timeDisplay.text = _gameTime.ToString();
+            GameController.GameStarted += StartGame;
             stopTimer = false;
+            DisplayTime(_gameTime);
 
         }
 
-        private void OnEnable()
+        protected virtual void OnDisable()
         {
-            StartGame();
+            GameController.GameStarted -= StartGame;
         }
 
+     
 
         void Update()
         {
@@ -44,8 +47,9 @@ namespace GameControl
             {
                 
                 GameTimer();
-                if (_seconds <= 0)
+                if (_seconds <= 0 && _minutes <= 0)
                 {
+                    Debug.Log("boom?");
                     Kaboom?.Invoke();
                     gameStarted = false;
                 }
@@ -70,10 +74,15 @@ namespace GameControl
         public virtual void GameTimer()
         { 
             _gameTime -= Time.deltaTime;
-            _minutes = Mathf.FloorToInt(_gameTime / 60);
-            _seconds = Mathf.FloorToInt(_gameTime % 60);
-            _timeDisplay.text = string.Format("{0:00}:{1:00}", _minutes, _seconds);
 
+            DisplayTime(_gameTime);
+        }
+
+        private void DisplayTime(float time)
+        {
+            _minutes = Mathf.FloorToInt(time / 60);
+            _seconds = Mathf.FloorToInt(time % 60);
+            _timeDisplay.text = string.Format("{0:00}:{1:00}", _minutes, _seconds);
         }
     }
 }

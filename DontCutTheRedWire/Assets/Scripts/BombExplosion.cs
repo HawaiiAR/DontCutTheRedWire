@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameControl;
 
 namespace BombParts {
     public class BombExplosion : MonoBehaviour
@@ -21,11 +22,13 @@ namespace BombParts {
         {
             _epicenter = this.transform.position;
             ArmedOrSafe.BombsGoneOff += Kaboom;
+            TimerScript.Kaboom += Kaboom;
         }
 
-        private void nDisable()
+        private void OnDisable()
         {
             ArmedOrSafe.BombsGoneOff -= Kaboom;
+            TimerScript.Kaboom -= Kaboom;
         }
 
         private void OnTriggerEnter(Collider other)

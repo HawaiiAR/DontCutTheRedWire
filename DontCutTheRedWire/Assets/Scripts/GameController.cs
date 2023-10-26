@@ -39,6 +39,11 @@ namespace GameControl
                     Debug.Log("PlayerWins");
                 }
             }
+
+            if (Input.GetKeyDown("n"))
+            {
+                StartGame();
+            }
         }
 
         public void StartGame()

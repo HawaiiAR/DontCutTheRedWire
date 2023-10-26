@@ -9,7 +9,7 @@ namespace HandTools
 
     public class BlastingCap : BoltControl
     {
-        [SerializeField] protected Grabbable grabable;
+    
         GameController gameControl;
 
 
@@ -19,7 +19,7 @@ namespace HandTools
             base.Start();
             gameControl = FindObjectOfType<GameController>();
             gameControl.AddPartToList(this.gameObject);
-            grabable.enabled = false;
+        
 
         }
         protected override void Update()
@@ -30,7 +30,7 @@ namespace HandTools
         {
             base.ReleaseBolt();
             gameControl.RemovePartFromList(this.gameObject);
-            grabable.enabled = true;
+         
         }
         protected override void OnTriggerEnter(Collider other)
         {
