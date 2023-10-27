@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameControl;
+using System;
 using Oculus.Interaction;
 
 namespace HandTools
@@ -11,8 +12,9 @@ namespace HandTools
     {
     
         GameController gameControl;
+       
 
-
+        bool isActive;
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -25,11 +27,14 @@ namespace HandTools
         protected override void Update()
         {
             base.Update();
+            
         }
         protected override void ReleaseBolt()
         {
             base.ReleaseBolt();
+   
             gameControl.RemovePartFromList(this.gameObject);
+
          
         }
         protected override void OnTriggerEnter(Collider other)
@@ -40,5 +45,7 @@ namespace HandTools
         {
             base.OnTriggerExit(other);
         }
+
+   
     }
 }

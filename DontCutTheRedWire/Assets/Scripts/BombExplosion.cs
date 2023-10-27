@@ -23,12 +23,14 @@ namespace BombParts {
             _epicenter = this.transform.position;
             ArmedOrSafe.BombsGoneOff += Kaboom;
             TimerScript.Kaboom += Kaboom;
+            BlastingWireBroken.WireBroken += Kaboom;
         }
 
         private void OnDisable()
         {
             ArmedOrSafe.BombsGoneOff -= Kaboom;
             TimerScript.Kaboom -= Kaboom;
+            BlastingWireBroken.WireBroken += Kaboom;
         }
 
         private void OnTriggerEnter(Collider other)

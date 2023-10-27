@@ -71,13 +71,15 @@ namespace HandTools
 
 
         protected virtual void ReleaseBolt()
-        {
-            Debug.Log("bolt out");
-            grabable.enabled = true;
-            grabable.gameObject.transform.parent = null;
-            Rigidbody gB = grabable.gameObject.GetComponent<Rigidbody>();
-            gB.isKinematic = false;
-            gB.useGravity = true;
+        {if (grabable != null)
+            {
+                Debug.Log("bolt out");
+                grabable.enabled = true;
+                grabable.gameObject.transform.parent = null;
+                Rigidbody gB = grabable.gameObject.GetComponent<Rigidbody>();
+                gB.isKinematic = false;
+                gB.useGravity = true;
+            }
             bombComponent.RemoveAttatcher(this.gameObject);
           //  _rb.isKinematic = false;
          //  _rb.useGravity = true;

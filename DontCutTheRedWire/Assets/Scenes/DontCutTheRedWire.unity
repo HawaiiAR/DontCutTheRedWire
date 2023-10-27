@@ -3233,7 +3233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &500026015
 Transform:
   m_ObjectHideFlags: 0
@@ -8581,12 +8581,25 @@ HingeJoint:
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
-  m_BreakForce: Infinity
+  m_BreakForce: 500
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1536359067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536359059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37d3f2b6e514110aef132be64ffae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _joint: {fileID: 1536359064}
 --- !u!1 &1536726575 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1906479711999661300, guid: f79aeefd60a66449ea5c8dd0c0400a79,
@@ -10291,7 +10304,7 @@ PrefabInstance:
     - target: {fileID: 4289706931025778868, guid: 08bd653119f9db54fb91155eb09c459a,
         type: 3}
       propertyPath: m_Mass
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7001587203448011866, guid: 08bd653119f9db54fb91155eb09c459a,
         type: 3}
@@ -10386,6 +10399,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1536359064}
+    - targetCorrespondingSourceObject: {fileID: 7665534328767522528, guid: 08bd653119f9db54fb91155eb09c459a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1536359067}
   m_SourcePrefab: {fileID: 100100000, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
 --- !u!1001 &1901101744
 PrefabInstance:
@@ -13278,6 +13295,7 @@ GameObject:
   - component: {fileID: 7750359699162335645}
   - component: {fileID: 4685133934076343414}
   - component: {fileID: 8267839072095027959}
+  - component: {fileID: 8267839072095027960}
   m_Layer: 0
   m_Name: boomCap
   m_TagString: Untagged
@@ -16835,6 +16853,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8267839072095027960
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2906552645805164356}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7504307732816693221, guid: dac214f8f5111487a85a5b059667e71a, type: 3}
 --- !u!4 &8309928383226885084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6402028572528054011, guid: 2aa495e9e18784c58aba50c5f9b1526d,
