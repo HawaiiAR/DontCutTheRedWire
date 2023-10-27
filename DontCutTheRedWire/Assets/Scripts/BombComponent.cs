@@ -82,16 +82,18 @@ namespace BombParts
                 {
                     w.SetActive(true);
                     _activeWires.Add(w);
+                   
                 }
             }
             if (!isConnector)
             {
                 int visibleWires = Random.Range(4, _wires.Length);
                 CalculateActiveWires(visibleWires);
+               
             }
 
-
             ActivateWires();
+
         }
 
         protected virtual void CalculateActiveWires(int visibleWires)
@@ -105,11 +107,8 @@ namespace BombParts
                 if (_wires[aWire] != null)
                 {
                     _wires[aWire].SetActive(true);
-
-                    if (_wires[aWire].gameObject == isActiveAndEnabled)
-                    {
-                        _activeWires.Add(_wires[aWire]);
-                    }
+                    _activeWires.Add(_wires[aWire]);
+                    
 
                 }
             }
