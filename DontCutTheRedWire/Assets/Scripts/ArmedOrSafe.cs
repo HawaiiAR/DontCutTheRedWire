@@ -15,15 +15,12 @@ namespace BombParts
 
         private MeshRenderer _rend;
         private List<Color> _wireColors = new List<Color> { Color.black, Color.blue, Color.green, Color.cyan, Color.magenta };
-      
 
-
-        private void Start()
+        private void Awake()
         {
-           
             _rend = this.GetComponent<MeshRenderer>();
-            
         }
+
 
         private void WireCut(string aliveOrDead)
         {

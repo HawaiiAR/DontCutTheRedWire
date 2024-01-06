@@ -12,16 +12,25 @@ namespace GameControl
         public static Action<string> DifficultyLevel;
         public static Action GameStarted;
 
+        [SerializeField] private GameObject _instructions;
+        [SerializeField] private GameObject _win;
+        [SerializeField] private GameObject _lose;
+  
         [SerializeField] private List<GameObject> _parts = new List<GameObject>();
         private string _difficultyLevel;
 
         bool gameStarted;
 
+        private void Awake()
+        {
+            TextArray("start");
+        }
 
         void Start()
         {
             TimerScript.Kaboom += GameOver;
             ArmedOrSafe.BombsGoneOff += GameOver;
+           
         }
 
         private void OnDisable()
@@ -57,7 +66,7 @@ namespace GameControl
             {
                 if (_parts.Count <= 3)
                 {
-                    Debug.Log("PlayerWins");
+                    TextArray("win");
                 }
             }
 
@@ -72,9 +81,31 @@ namespace GameControl
             GameStarted?.Invoke();
         }
 
-        private void GameOver()
-        {
+        private void GameOver(){
+            TextArray("lose");
+        }
 
+        private void TextArray(string textArrayState)
+        {
+            switch (textArrayState)
+            {
+                case "start":
+                    TextAssets(true, false, false);
+                    break;
+                case "win":
+                    TextAssets(false, true, false);
+                    break;
+                case "lose":
+                    TextAssets(false, false, true);
+                    break;
+            }
+        }
+
+        private void TextAssets(bool instructionsState, bool winState, bool loseState)
+        {
+            _instructions.SetActive(instructionsState);
+            _win.SetActive(winState);
+            _lose.SetActive(loseState);
         }
 
         public void AddPartToList(GameObject part)

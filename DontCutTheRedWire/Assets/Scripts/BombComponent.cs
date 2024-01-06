@@ -76,21 +76,26 @@ namespace BombParts
                 w.SetActive(false);
             }
 
-            if (isConnector)
-            {
-                foreach (GameObject w in _wires)
-                {
-                    w.SetActive(true);
-                    _activeWires.Add(w);
-                   
-                }
-            }
-            if (!isConnector)
+            int visibleWires = Random.Range(4, _wires.Length);
+            CalculateActiveWires(visibleWires);
+         /*   if (!isConnector)
             {
                 int visibleWires = Random.Range(4, _wires.Length);
                 CalculateActiveWires(visibleWires);
                
             }
+
+            if (isConnector)
+            {
+               
+                foreach (GameObject w in _wires)
+                {
+                    w.SetActive(true);
+                    _activeWires.Add(w);
+
+
+                }
+            }*/
 
             ActivateWires();
 
@@ -98,18 +103,36 @@ namespace BombParts
 
         protected virtual void CalculateActiveWires(int visibleWires)
         {
-
-            for (int i = 0; i < visibleWires - 1; i++)
+            if (!isConnector)
             {
-
-                int aWire = Random.Range(1, visibleWires);
-
-                if (_wires[aWire] != null)
+                for (int i = 0; i < visibleWires - 1; i++)
                 {
-                    _wires[aWire].SetActive(true);
-                    _activeWires.Add(_wires[aWire]);
-                    
 
+                    int aWire = Random.Range(1, visibleWires);
+
+                    if (_wires[aWire] != null)
+                    {
+                        _wires[aWire].SetActive(true);
+                        _activeWires.Add(_wires[aWire]);
+
+
+                    }
+                }
+            }
+            if (isConnector)
+            {
+                visibleWires = 5;
+
+                for (int i = 0; i < visibleWires - 1; i++)
+                {    
+
+                    if (_wires[i] != null)
+                    {
+                        _wires[i].SetActive(true);
+                        _activeWires.Add(_wires[i]);
+
+
+                    }
                 }
             }
         }
